@@ -1,10 +1,10 @@
+![AHP Bar Chart](ahp_worldcup2026_barh.png)
+
 AHP — World Cup 2026 Favorites
 ================================
 
 Use the Analytic Hierarchy Process (AHP) to rank national teams for the FIFA World Cup 2026.
 All scoring logic and checks are kept in Excel; Python reads the Results sheet, exports a CSV, and generates the chart.
-
-[Chart file in repo: ahp_worldcup2026_barh.png]
 
 --------------------------------
 
@@ -95,44 +95,3 @@ References
 ----------
 - T. L. Saaty (1980). The Analytic Hierarchy Process. McGraw-Hill.
 - T. L. Saaty & L. G. Vargas (2012). Models, Methods, Concepts & Applications of the Analytic Hierarchy Process. Springer.
-
-Appendix — Python Runner (same as file)
----------------------------------------
-# AHP World Cup 2026 — Read Excel, export CSV, and plot horizontal bar chart
-import pandas as pd
-import matplotlib.pyplot as plt
-from pathlib import Path
-
-EXCEL_PATH = Path("AHP_WorldCup2026_Favorites.xlsx")
-OUT_CSV = EXCEL_PATH.with_name("ahp_worldcup2026_results.csv")
-OUT_PNG = EXCEL_PATH.with_name("ahp_worldcup2026_barh.png")
-
-TEAM_COL = "Team"
-SCORE_COL = "Score (%)"
-
-df = pd.read_excel(EXCEL_PATH, sheet_name="Results")
-df_sorted = df.sort_values(by=SCORE_COL, ascending=False).reset_index(drop=True)
-df_sorted.to_csv(OUT_CSV, index=False)
-
-fig, ax = plt.subplots(figsize=(9, 6))
-bars = ax.barh(df_sorted[TEAM_COL], df_sorted[SCORE_COL])
-
-ax.set_xlabel("Score (%)")
-ax.set_title("AHP — World Cup 2026 Favorites (Score %)")
-ax.invert_yaxis()
-ax.grid(axis="x", alpha=0.2)
-
-values = df_sorted[SCORE_COL].to_numpy()
-for rect, v in zip(bars, values):
-    ax.text(
-        rect.get_x() + rect.get_width() / 2,
-        rect.get_y() + rect.get_height() / 2,
-        f"{v:.2f}%",
-        ha="center", va="center",
-        color="white", fontsize=10
-    )
-
-plt.tight_layout()
-plt.savefig(OUT_PNG, dpi=200)
-plt.show()
-plt.close()
