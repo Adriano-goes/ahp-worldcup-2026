@@ -1,11 +1,10 @@
-![AHP Bar Chart](ahp_worldcup2026_barh.png)
-
 AHP — World Cup 2026 Favorites
 ================================
 
 Use the Analytic Hierarchy Process (AHP) to rank national teams for the FIFA World Cup 2026.
 All scoring logic and checks are kept in Excel; Python reads the Results sheet, exports a CSV, and generates the chart.
 
+![AHP Bar Chart](ahp_worldcup2026_barh.png)
 --------------------------------
 
 Overview
