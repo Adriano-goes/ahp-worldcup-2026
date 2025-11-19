@@ -5,7 +5,6 @@ Use the Analytic Hierarchy Process (AHP) to rank national teams for the FIFA Wor
 All scoring logic and checks are kept in Excel; Python reads the Results sheet, exports a CSV, and generates the chart.
 
 ![AHP Bar Chart](ahp_worldcup2026_barh.png)
---------------------------------
 
 Overview
 --------
